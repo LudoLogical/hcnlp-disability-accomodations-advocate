@@ -7,6 +7,8 @@ function decorate(message: ReactNode, inItalics: boolean, inBold: boolean): Reac
 
 export default function renderMessage(message: string): ReactNode[] {
 
+  message = message.trim();
+
   let output: ReactNode[] = [];
   let i = 0;
   let inItalics = false;
