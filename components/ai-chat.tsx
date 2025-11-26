@@ -12,6 +12,7 @@ import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
 import clsx from "clsx";
 import { defaultSystemPrompt } from "@/lib/constants";
 import { doConverse } from "@/lib/aws";
+import renderMessage from "./ui/rendered-message";
 
 // Optional TODO: useRef() to call setSelectionRange(length, length) on the textarea for currentSystemPromptInput
 // see https://www.geeksforgeeks.org/javascript/how-to-place-cursor-position-at-end-of-text-in-text-input-field-using-javascript/
@@ -45,6 +46,7 @@ export default function AIChat() {
       setMessages(oldMessages)
     } else {
       setMessages([...updatedMessages, response]);
+      console.log(response);
     }
 
   }
@@ -75,7 +77,7 @@ export default function AIChat() {
                 </div>
               )}
               <p className={clsx("max-w-sm rounded-md p-4", message.role === 'user' ? "bg-blue-100" : "bg-zinc-200")}>
-                {message.text}
+                {...renderMessage(message.text)}
               </p>
               {message.role === 'user' && (
                 <div className="bg-blue-100 border rounded-full p-3 h-fit">
